@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
+let ejs = require('ejs');
 
 app.get('/', (req, res) => {
     res.send("Hello World");
