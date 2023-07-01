@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 
 const app = express();
 let ejs = require('ejs');
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
-
+var newListItem=[];
 var date = new Date();
 var day= date.getDay();
 var dayName="";
@@ -38,9 +38,18 @@ switch (day) {
 }
 
 app.get('/', (req, res) => {
-    res.render('index', {kindOfDay: dayName});
+    res.render('index', {
+        kindOfDay: dayName,
+        newListItem: newListItem
+    });
 });
 
 app.listen(3000,function(){
     console.log("listening on port 3000");
 });
+
+app.post('/', (req, res) => {
+    newListItem.push(req.body.newItem);
+    res.redirect("/");
+/*     console.log(req.body.newItem);
+ */});
